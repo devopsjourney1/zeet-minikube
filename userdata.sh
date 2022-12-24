@@ -31,17 +31,18 @@ echo "starting Minikube" >> /home/ubuntu/start.log
 runuser -l ubuntu -c "minikube start"
 
 # Create a Service Account, Bind admin clusterrole, Generate Password
+echo "creating kubeconfig at /home/ubuntu/.kube/external-kubeconfig" >> /home/ubuntu/start.log
 sudo -u ubuntu -i <<'EOF'
 kubectl create serviceaccount externalserviceacct
 kubectl create clusterrolebinding externalrolebinding --serviceaccount=default:externalserviceacct --clusterrole=admin
-cp ~/.kube/config external-kubeconfig
+cp ~/.kube/config ~/.kube/external-kubeconfig
 TOKEN=$(kubectl create token externalserviceacct)
 EXTERNAL_URL=https://$(curl ifconfig.me):8001
-kubectl config set-cluster minikube --kubeconfig=external-kubeconfig --insecure-skip-tls-verify=true --server=$EXTERNAL_URL
-kubectl config set-credentials minikube --kubeconfig=external-kubeconfig --username=externalserviceacct --password=$TOKEN
-kubectl config set-credentials minikube --kubeconfig=external-kubeconfig --username=externalserviceacct
-kubectl config unset users.minikube.client-certificate  --kubeconfig=external-kubeconfig
-kubectl config unset users.minikube.client-key --kubeconfig=external-kubeconfig
+kubectl config set-cluster minikube --kubeconfig=~/.kube/external-kubeconfig --insecure-skip-tls-verify=true --server=$EXTERNAL_URL
+kubectl config set-credentials minikube --kubeconfig=~/.kube/external-kubeconfig --username=externalserviceacct --password=$TOKEN
+kubectl config set-credentials minikube --kubeconfig=~/.kube/external-kubeconfig --username=externalserviceacct
+kubectl config unset users.minikube.client-certificate  --kubeconfig=~/.kube/external-kubeconfig
+kubectl config unset users.minikube.client-key --kubeconfig=~/.kube/external-kubeconfig
 EOF
 
 
