@@ -11,7 +11,7 @@ terraform {
 
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lightsail_instance
 resource "aws_lightsail_instance" "server" {
-  name              = "minikube-lightsail"
+  name              = "minikube"
   availability_zone = "us-west-2a"
   blueprint_id      = "ubuntu_20_04"
   bundle_id         = "small_2_0"
