@@ -31,19 +31,20 @@ echo "starting Minikube" >> /home/ubuntu/start.log
 runuser -l ubuntu -c "minikube start"
 
 # Create a Service Account, Bind admin clusterrole, Generate Password
-sudo su - ubuntu
+sudo -u ubuntu -i <<'EOF'
 kubectl create serviceaccount externalserviceacct
 kubectl create clusterrolebinding externalrolebinding --serviceaccount=default:externalserviceacct --clusterrole=admin
 TOKEN=$(kubectl create token externalserviceacct)
 EXTERNAL_URL=http://$(curl ifconfig.me):8001
 kubectl config set-cluster minikube --insecure-skip-tls-verify=true --server=$EXTERNAL_URL
-kubectl config set-cluster minikube --insecure-skip-tls-verify=true --server=$EXTERNAL_URL
 kubectl config set-credentials minikube --username=externalserviceacct --password=$TOKEN
 kubectl config set-credentials minikube --username=externalserviceacct
 kubectl config unset users.minikube.client-certificate
 kubectl config unset users.minikube.client-key
+EOF
+
 
 # Setup proxy to receive connections from all IPs on port 8001
-kubectl proxy --address='0.0.0.0' --accept-hosts='^*$' &
+#kubectl proxy --address='0.0.0.0' --accept-hosts='^*$'
 
 echo "start script complete" >> /home/ubuntu/start.log
