@@ -14,7 +14,7 @@ resource "aws_lightsail_instance" "server" {
   name              = "minikube"
   availability_zone = "us-west-2a"
   blueprint_id      = "ubuntu_20_04"
-  bundle_id         = "small_2_0"
+  bundle_id         = "medium_2_0"
   tags = {
     environment = "development"
   }
