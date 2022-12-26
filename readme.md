@@ -5,6 +5,7 @@ With Zeet: Fork this repository, https://zeet.co/new/terraform
 Manual: launch with `terraform up`
 
 # Create a Service Account, Bind clusteradminrole, Generate Password, Generate Kubeconfig
+```
 kubectl create serviceaccount externalserviceacct
 kubectl create clusterrolebinding externalrolebinding --serviceaccount=default:externalserviceacct --clusterrole=admin
 cp ~/.kube/config external-kubeconfig
@@ -16,6 +17,7 @@ kubectl config set-credentials minikube --kubeconfig=external-kubeconfig --usern
 kubectl config unset users.minikube.client-certificate  --kubeconfig=external-kubeconfig
 kubectl config unset users.minikube.client-key --kubeconfig=external-kubeconfig
 kubectl get all --kubeconfig external-kubeconfig
+```
 
 
 # Add your Kubernetes cluster to Zeet
@@ -27,8 +29,10 @@ https://zeet.co/new?cpu=1&dedicated=1&memory=1&source=github
 
 
 # Porforward/test the container
+```
 kubectl get namespace
 kubectl get all -n <namespace>
 kubectl port-forward service/zeet-flask-9iiv-main 3000:3000 -n 0a33e1fe-790c-4ac9-8248-f6bd12416565
 curl localhost:3000
+```
 
