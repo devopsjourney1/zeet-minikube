@@ -38,7 +38,7 @@ kubectl create clusterrolebinding externalrolebinding --serviceaccount=default:e
 cd ~/.kube/
 cp ~/.kube/config ~/.kube/external-kubeconfig
 TOKEN=$(kubectl create token externalserviceacct)
-EXTERNAL_URL=https://$(curl ifconfig.me):8001
+EXTERNAL_URL=http://$(curl ifconfig.me):8001
 kubectl config set-cluster minikube --kubeconfig=external-kubeconfig --insecure-skip-tls-verify=true --server=$EXTERNAL_URL
 kubectl config set-credentials minikube --kubeconfig=external-kubeconfig --username=externalserviceacct --password=$TOKEN
 kubectl config set-credentials minikube --kubeconfig=external-kubeconfig --username=externalserviceacct
