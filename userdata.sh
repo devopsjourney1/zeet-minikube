@@ -44,6 +44,7 @@ kubectl config set-credentials minikube --kubeconfig=external-kubeconfig --usern
 kubectl config set-credentials minikube --kubeconfig=external-kubeconfig --username=externalserviceacct
 kubectl config unset users.minikube.client-certificate  --kubeconfig=external-kubeconfig
 kubectl config unset users.minikube.client-key --kubeconfig=external-kubeconfig
+cp ~/.kube/external-kubeconfig ~/external-kubeconfig
 EOF
 
 
