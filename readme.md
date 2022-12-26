@@ -11,7 +11,7 @@ Copy the contents of `/home/ubuntu/.kube/external-kubeconfig` to a local file to
 ```
 
 # Add your Kubernetes cluster to Zeet
-1. Port forward Kubernetes control plane for external access: `kubectl proxy --address='0.0.0.0' --accept-hosts='^*$'`
+1. Port forward Kubernetes control plane for external access: `kubectl proxy --address='0.0.0.0' --accept-hosts='^*$' &`
 2. Zeet Cluster Management: https://zeet.co/team-bradmorg/console/clusters/view
 3. Upload external-kubeconfig that was generated in the last step `/home/ubuntu/.kube/external-kubeconfig`
 
