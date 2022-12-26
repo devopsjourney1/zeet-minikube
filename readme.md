@@ -21,6 +21,7 @@ kubectl get all --kubeconfig external-kubeconfig
 
 
 # Add your Kubernetes cluster to Zeet
+Port forward Kubernetes control plane for external access: `kubectl proxy --address='0.0.0.0' --accept-hosts='^*$'`
 Point Zeet to your cluster: https://zeet.co/team-bradmorg/console/clusters/view
 Upload external-kubeconfig  that was generated in the last step
 
