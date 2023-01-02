@@ -23,7 +23,7 @@ https://zeet.co/new?cpu=1&dedicated=1&memory=1&source=github
 ```
 kubectl get namespace
 kubectl get all -n <namespace>
-kubectl port-forward service/zeet-flask-9iiv-main 3000:3000 -n 0a33e1fe-790c-4ac9-8248-f6bd12416565
+kubectl port-forward <servicename> 3000:3000 -n <namespace>
 curl localhost:3000
 ```
 
